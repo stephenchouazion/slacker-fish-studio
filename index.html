@@ -1,0 +1,882 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#FBF5EC">
+  <meta name="description" content="摸魚設計工作室 Slacker Fish Studio｜認真摸魚，用心設計。為新竹小店、新創與小品牌提供品牌策略、視覺設計、網站規劃與 AI 解決方案。">
+  <meta name="robots" content="index, follow">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="zh_TW">
+  <meta property="og:title" content="摸魚設計工作室｜認真摸魚，用心設計。">
+  <meta property="og:description" content="用有策略的設計與 AI 賦能，讓小品牌創造大影響力。Slacker Fish Studio — Serious About Design. Not So Serious About Everything Else.">
+  <title>摸魚設計工作室 Slacker Fish Studio｜認真摸魚，用心設計。</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>document.documentElement.classList.add('js');</script>
+  <style>
+    /* 01 / Design tokens */
+    :root {
+      --cream:#FBF5EC; --paper:#FFFFFF; --ink:#2B2B2B; --muted:#2B2B2B;
+      --orange:#F28C38; --orange-dark:#F28C38; --blue:#5FA8D3; --blue-dark:#5FA8D3;
+      --line:rgba(43,43,43,.13); --glass:rgba(255,255,255,.68);
+      --shadow:0 22px 70px rgba(43,43,43,.09); --serif:'Noto Serif TC',serif;
+      --sans:'Noto Sans TC',system-ui,-apple-system,sans-serif;
+      --ease:cubic-bezier(.2,.75,.2,1); --wrap:1360px;
+    }
+    *,*::before,*::after{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:100px}
+    body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow-x:clip}
+    img,svg{max-width:100%}a{text-decoration:none;color:inherit}button{font:inherit}
+    ::selection{color:#2B2B2B;background:#FCE8D6}
+    :focus-visible{outline:3px solid var(--blue-dark);outline-offset:4px;border-radius:5px}
+    .skip-link{position:fixed;top:-70px;left:15px;padding:12px 20px;background:#FFFFFF;z-index:1000;border-radius:12px}
+    .skip-link:focus{top:12px}
+    .sr-only{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+    .page-wrap{width:min(calc(100% - 100px),var(--wrap));margin-inline:auto}
+    .section-pad{padding-block:125px}
+    .smallcap{font-family:var(--sans);font-size:11px;font-weight:700;line-height:1.6;letter-spacing:.22em;text-transform:uppercase}
+    .section-kicker{display:flex;align-items:center;gap:14px;color:var(--orange-dark);margin-bottom:20px}
+    .section-kicker::before{content:'';width:24px;height:1px;background:currentColor}
+    .section-heading{font-family:var(--serif);font-size:clamp(31px,4vw,61px);line-height:1.34;letter-spacing:-.045em;font-weight:700}
+    .section-intro{color:var(--muted);font-size:16px;line-height:2.15;max-width:670px}
+    .handline{background:linear-gradient(transparent 82%,rgba(242,140,56,.36) 82%,rgba(242,140,56,.36) 95%,transparent 95%)}
+    .glass{border:1px solid rgba(255,255,255,.76);background:var(--glass);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:var(--shadow),inset 0 1px 0 rgba(255,255,255,.72)}
+    .hoverglass{position:relative;isolation:isolate;transition:transform .32s var(--ease),box-shadow .32s var(--ease)}
+    .hoverglass::after{content:'';position:absolute;inset:0;border-radius:inherit;padding:1px;background:linear-gradient(125deg,rgba(242,140,56,.8),rgba(95,168,211,.72));mask:linear-gradient(#FFFFFF 0 0) content-box,linear-gradient(#FFFFFF 0 0);mask-composite:exclude;-webkit-mask:linear-gradient(#FFFFFF 0 0) content-box,linear-gradient(#FFFFFF 0 0);-webkit-mask-composite:xor;opacity:0;pointer-events:none;transition:opacity .3s}
+    .hoverglass:hover{transform:translateY(-5px);box-shadow:0 25px 65px rgba(43,43,43,.13)}
+    .hoverglass:hover::after{opacity:1}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:21px;min-height:55px;padding:13px 23px;border-radius:100px;font-size:13px;font-weight:700;white-space:normal;line-height:1.5;transition:transform .26s var(--ease),background .26s,color .26s,box-shadow .26s}
+    .btn svg{width:17px;height:17px;flex-shrink:0;transition:transform .26s}
+    .btn:hover{transform:translateY(-3px)}.btn:hover svg{transform:translate(3px,-2px)}
+    .btn-primary{background:var(--orange);color:#2B2B2B;box-shadow:0 10px 25px rgba(242,140,56,.22)}
+    .btn-primary:hover{background:#F28C38;box-shadow:0 16px 32px rgba(242,140,56,.3)}
+    .btn-outline{border:1px solid rgba(43,43,43,.2);background:rgba(255,255,255,.5)}
+    .btn-outline:hover{border-color:var(--orange)}
+    .round-arrow{width:40px;height:40px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center}
+    /* 02 / Global ambient treatments */
+    .paper-noise{position:relative;isolation:isolate}
+    .paper-noise::before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.13'/%3E%3C/svg%3E");opacity:.12}
+    .scribble{display:inline-block;color:var(--orange);transform:rotate(-8deg)}
+    .orange-text{color:var(--orange-dark)}
+    .blue-text{color:var(--blue-dark)}
+    .reveal{opacity:1;transform:none}
+    .js .reveal:not(.is-visible){opacity:0;transform:translateY(20px)}
+    .js .reveal{transition:opacity .75s var(--ease),transform .75s var(--ease)}
+    .js .reveal.is-visible{opacity:1;transform:translateY(0)}
+    /* 03 / Navbar */
+    .header{position:fixed;z-index:200;top:0;left:0;right:0;transition:background .3s,border .3s,box-shadow .3s;border-bottom:1px solid transparent}
+    .header.scrolled{background:rgba(255,255,255,.89);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom-color:rgba(43,43,43,.09);box-shadow:0 5px 23px rgba(43,43,43,.035)}
+    .nav-shell{height:93px;display:flex;align-items:center;justify-content:space-between;gap:25px}
+    .brand{display:flex;align-items:center;gap:10px;flex-shrink:0}
+    .brand-mark{color:var(--orange-dark);width:48px;height:44px;transform:rotate(-9deg)}
+    .brand-cn,.brand-en{display:block}
+    .brand-cn{font-family:var(--serif);font-weight:800;font-size:20px;letter-spacing:.12em;line-height:1.45}
+    .brand-en{font-size:9px;letter-spacing:.17em;color:var(--muted);font-weight:700}
+    .desktop-nav{display:flex;align-items:center;gap:clamp(13px,1.65vw,29px)}
+    .desktop-nav a{font-size:12px;font-weight:600;color:#2B2B2B;white-space:nowrap;position:relative;padding:8px 0}
+    .desktop-nav a::after{content:'';position:absolute;bottom:0;left:0;right:100%;height:2px;background:var(--orange);transition:right .27s}
+    .desktop-nav a:hover::after,.desktop-nav a.active::after{right:0}
+    .desktop-nav a.active{color:var(--ink)}
+    .nav-cta{min-height:43px;font-size:12px;padding:10px 17px}
+    .menu-toggle{display:none;width:44px;height:44px;border:1px solid var(--line);border-radius:50%;background:rgba(255,255,255,.65);align-items:center;justify-content:center;cursor:pointer}
+    .menu-toggle svg{width:22px;height:22px}.mobile-nav{display:none}
+    /* 04 / Hero */
+    .hero{position:relative;min-height:min(840px,100svh);padding-top:125px;overflow:hidden;display:flex;align-items:center;background:radial-gradient(ellipse at 79% 41%,rgba(95,168,211,.3),transparent 32%),radial-gradient(ellipse at 13% 73%,rgba(242,140,56,.24),transparent 45%)}
+    .hero::after{content:'';position:absolute;bottom:34px;left:50%;width:80%;height:1px;background:linear-gradient(to right,transparent,rgba(43,43,43,.15),transparent);transform:translateX(-50%)}
+    .hero-inner{display:grid;grid-template-columns:1.06fr .94fr;align-items:center;gap:15px;padding-block:85px 110px;position:relative;z-index:2}
+    .hero-copy{position:relative;z-index:3;max-width:760px}
+    .eyebrow{display:flex;align-items:center;gap:13px;font-size:11px;color:#2B2B2B;font-weight:700;letter-spacing:.16em}
+    .eyebrow .dot{width:8px;height:8px;border-radius:100%;background:var(--orange);box-shadow:0 0 0 5px rgba(242,140,56,.13)}
+    .hero-h1{font-family:var(--serif);font-size:clamp(43px,5.85vw,88px);font-weight:800;line-height:1.42;letter-spacing:-.085em;margin:38px 0 22px;max-width:760px}
+    .headline-space{position:relative;display:block}
+    .headline-ghost{visibility:hidden;display:block;white-space:normal}
+    .headline-type{position:absolute;inset:0;display:block;white-space:normal;overflow:visible}
+    .headline-typed{white-space:pre-line;border-right:3px solid var(--orange);padding-right:3px;animation:caret .9s steps(1) infinite}
+    @keyframes caret{50%{border-color:transparent}}
+    .hero-subtitle{font-size:clamp(15px,1.45vw,19px);font-weight:500;line-height:2.05;max-width:605px;color:#2B2B2B;min-height:78px}
+    .js .hero-subtitle:not(.is-shown){opacity:0;transform:translateY(9px)}
+    .hero-subtitle{transition:opacity .85s ease,transform .85s ease}
+    .hero-actions{display:flex;flex-wrap:wrap;align-items:center;gap:13px;margin-top:38px}
+    .hero-stats{display:flex;align-items:stretch;gap:0;margin-top:74px;width:max-content;max-width:100%}
+    .stat{padding:0 32px;border-right:1px solid rgba(43,43,43,.14)}.stat:first-child{padding-left:0}.stat:last-child{border-right:0}
+    .stat strong{font-family:var(--serif);display:block;font-size:clamp(25px,2.8vw,37px);font-weight:700;letter-spacing:-.055em}
+    .stat span{display:block;margin-top:4px;color:var(--muted);font-size:11px;letter-spacing:.05em}
+    .hero-art{position:relative;min-height:550px;display:grid;place-items:center;transform:translate3d(0,0,0)}
+    .art-ambient{position:absolute;width:min(42vw,580px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(95,168,211,.65),rgba(95,168,211,.2) 55%,transparent 71%);filter:blur(20px)}
+    .aquarium{position:relative;width:min(100%,580px);aspect-ratio:1;display:grid;place-items:center}
+    .aquarium-glass{position:absolute;width:87%;height:85%;border-radius:48% 52% 51% 49%/49% 46% 54% 51%;border:1.4px solid rgba(255,255,255,.87);box-shadow:inset 21px 13px 40px rgba(255,255,255,.57),inset -24px -19px 60px rgba(95,168,211,.09),0 27px 90px rgba(95,168,211,.1);background:linear-gradient(135deg,rgba(255,255,255,.61),rgba(95,168,211,.1) 52%,rgba(255,255,255,.22));backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);transform:rotate(-11deg)}
+    .aquarium-glass::before,.aquarium-glass::after{content:'';position:absolute;border-radius:50%;pointer-events:none}
+    .aquarium-glass::before{inset:13px 20px 17px 16px;border:1px solid rgba(255,255,255,.6)}
+    .aquarium-glass::after{width:31%;height:9%;top:8%;left:15%;border-top:4px solid rgba(255,255,255,.64);transform:rotate(-26deg)}
+    .aquarium-halo{position:absolute;width:71%;aspect-ratio:1;border:1px dashed rgba(95,168,211,.19);border-radius:50%;transform:rotate(21deg)}
+    .hero-fish{position:absolute;width:70%;height:auto;left:19%;top:24%;color:var(--orange);filter:drop-shadow(0 7px 13px rgba(242,140,56,.13));animation:fish-float 8s ease-in-out infinite}
+    .hero-water{position:absolute;width:88%;top:40%;left:5%;opacity:.85}
+    .fish-fin{transform-origin:44% 50%;animation:fin 4s ease-in-out infinite}
+    @keyframes fin{50%{transform:rotate(7deg)}}
+    @keyframes fish-float{50%{transform:translate3d(0,-13px,0) rotate(2deg)}}
+    .orb{position:absolute;border-radius:50%;background:radial-gradient(circle at 28% 22%,rgba(255,255,255,.8),rgba(95,168,211,.15) 55%,rgba(95,168,211,.05));border:1px solid rgba(95,168,211,.25);box-shadow:inset 3px 3px 6px rgba(255,255,255,.8);animation:bubble-rise 9s ease-in-out infinite}
+    .orb.one{width:21px;height:21px;left:42%;top:20%;animation-delay:-2s}.orb.two{width:12px;height:12px;left:59%;top:16%;animation-delay:-6s}.orb.three{width:33px;height:33px;left:63%;top:25%;animation-delay:-3s}.orb.four{width:9px;height:9px;left:37%;top:34%;animation-delay:-7s}.orb.five{width:14px;height:14px;left:75%;top:44%;animation-delay:-5s}
+    @keyframes bubble-rise{0%,100%{transform:translateY(12px);opacity:.43}50%{transform:translateY(-15px);opacity:.9}}
+    .art-label{position:absolute;font-size:10px;font-weight:700;letter-spacing:.2em;color:#2B2B2B;line-height:1.9}
+    .art-label.a{left:-5%;top:18%;transform:rotate(-8deg)}.art-label.b{right:-3%;bottom:19%;text-align:right;transform:rotate(6deg)}
+    .ring-text{position:absolute;right:3%;top:3%;width:94px;height:94px;border:1px solid rgba(242,140,56,.35);border-radius:50%;display:grid;place-items:center;color:var(--orange-dark);font-size:10px;letter-spacing:.12em;line-height:1.7;text-align:center;transform:rotate(13deg)}
+    .art-serial{position:absolute;left:1%;bottom:10%;color:rgba(43,43,43,.38);font-size:10px;letter-spacing:.12em}
+    .scroll-cue{position:absolute;bottom:54px;left:calc((100% - min(calc(100% - 100px),var(--wrap)))/2);z-index:3;font-size:10px;letter-spacing:.18em;color:var(--muted);display:flex;align-items:center;gap:15px}
+    .scroll-cue::after{content:'';width:60px;height:1px;background:var(--muted);opacity:.4}
+    /* 05 / Services */
+    .services{position:relative;background:var(--paper);overflow:hidden}
+    .services::before{content:'SMARTER';position:absolute;right:-1%;top:25px;font-size:clamp(80px,15vw,260px);font-family:var(--serif);font-weight:800;letter-spacing:-.08em;color:rgba(242,140,56,.035);pointer-events:none}
+    .services-head{display:flex;justify-content:space-between;gap:70px;align-items:end;margin-bottom:50px}
+    .services-head .section-heading{max-width:680px}.services-aside{width:260px;font-size:12px;line-height:2;color:var(--muted);flex-shrink:0}
+    .services-aside .decor-line{width:90px;height:1px;background:var(--orange);margin-bottom:18px}
+    .service-grid{display:grid;grid-template-columns:1.1fr .9fr .9fr;grid-template-rows:minmax(290px,auto) minmax(240px,auto);gap:16px}
+    .service-feature{grid-row:span 2;border-radius:28px;background:radial-gradient(circle at 100% 0%,rgba(255,255,255,.63),transparent 40%),linear-gradient(160deg,#EAF5F9,#EAF5F9 69%,#EAF5F9);padding:41px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;position:relative}
+    .service-feature .index{font-size:10px;letter-spacing:.25em;color:var(--blue-dark);font-weight:700}
+    .service-feature h3{font-family:var(--serif);font-size:clamp(29px,3.25vw,46px);line-height:1.55;font-weight:700;letter-spacing:-.04em;max-width:370px;margin-top:22px}
+    .service-feature p{max-width:390px;line-height:2.05;font-size:14px;color:#2B2B2B;margin-top:20px}
+    .feature-fish{width:100%;height:145px;color:var(--orange);margin:23px 0 5px;transform:rotate(-8deg)}
+    .service-card{border-radius:26px;padding:30px;display:flex;flex-direction:column;min-height:225px;overflow:hidden}
+    .service-card h3{font-family:var(--serif);font-weight:700;font-size:24px;line-height:1.5;letter-spacing:-.04em;margin:15px 0 9px}
+    .service-card p{font-size:13px;color:#2B2B2B;line-height:2;max-width:330px}
+    .service-card .service-index{display:flex;align-items:center;justify-content:space-between;font-size:10px;letter-spacing:.18em;color:var(--orange-dark);font-weight:700}
+    .service-card .service-icon{width:33px;height:33px;color:var(--blue-dark)}
+    .service-card:nth-child(2){background:#FCE8D6}.service-card:nth-child(3){background:#FBF5EC}.service-card:nth-child(4){background:#FBF5EC}.service-card:nth-child(5){background:#FCE8D6}
+    .values-intro{margin-top:96px;display:grid;grid-template-columns:.65fr 1.35fr;gap:70px;align-items:start}
+    .values-intro h3{font-family:var(--serif);font-size:clamp(28px,3vw,40px);line-height:1.55;letter-spacing:-.04em}
+    .values-intro p{color:var(--muted);font-size:15px;line-height:2.1;margin-top:13px}
+    .value-rows{border-top:1px solid var(--line);margin-top:45px}
+    .value-row{display:grid;grid-template-columns:92px 1fr 1.1fr;column-gap:25px;align-items:start;border-bottom:1px solid var(--line);padding:30px 4px}
+    .value-row .num{font-family:var(--serif);color:var(--orange-dark);font-size:31px}
+    .value-row h4{font-family:var(--serif);font-size:20px;font-weight:700;line-height:1.7;letter-spacing:-.03em}
+    .value-row p{color:var(--muted);font-size:13px;line-height:2.15}
+    .service-end{display:flex;align-items:end;justify-content:space-between;gap:30px;margin-top:58px}
+    .service-end strong{font-family:var(--serif);display:block;font-size:clamp(21px,2.35vw,32px);font-weight:700}
+    .service-end p{color:var(--muted);font-size:13px;line-height:2;margin-top:12px}
+    .service-end em{font-size:11px;font-style:normal;color:var(--orange-dark);letter-spacing:.05em}
+    /* 06 / Portfolio */
+    .portfolio{background:var(--cream)}
+    .portfolio-head{display:flex;justify-content:space-between;align-items:end;gap:35px;margin-bottom:43px}
+    .portfolio-note{font-size:12px;color:var(--muted);max-width:350px;line-height:2;text-align:right}
+    .portfolio-grid{display:grid;grid-template-columns:1.16fr .84fr;gap:29px;align-items:start}
+    .portfolio-item{min-width:0}
+    .portfolio-item:nth-child(2){margin-top:95px}
+    .portfolio-item:nth-child(3){grid-column:1 / -1;width:75%;margin-top:3px}
+    .portfolio-art{position:relative;overflow:hidden;border-radius:24px;aspect-ratio:1.3;border:1px solid rgba(43,43,43,.06);display:grid;place-items:center}
+    .portfolio-item:nth-child(2) .portfolio-art{aspect-ratio:.95}
+    .portfolio-item:nth-child(3) .portfolio-art{aspect-ratio:2.45}
+    .portfolio-art::after{content:'';position:absolute;inset:0;border:1px solid rgba(255,255,255,.44);border-radius:inherit;pointer-events:none}
+    .placeholder-1{background:linear-gradient(140deg,#EAF5F9,#FCE8D6)}
+    .placeholder-2{background:linear-gradient(145deg,#EAF5F9,#FBF5EC)}
+    .placeholder-3{background:linear-gradient(90deg,#FCE8D6,#FBF5EC)}
+    .portfolio-graphic{position:absolute;inset:0;width:100%;height:100%;transition:transform .6s var(--ease)}
+    .portfolio-item:hover .portfolio-graphic{transform:scale(1.04)}
+    .placeholder-tag{position:absolute;top:22px;left:23px;padding:9px 14px;border:1px solid rgba(43,43,43,.15);border-radius:99px;background:rgba(255,255,255,.56);backdrop-filter:blur(7px);font-size:10px;letter-spacing:.08em;font-weight:700;color:#2B2B2B}
+    .placeholder-center{position:relative;z-index:1;text-align:center;padding:16px;background:rgba(255,255,255,.42);border:1px solid rgba(255,255,255,.68);border-radius:15px;backdrop-filter:blur(10px);box-shadow:0 8px 36px rgba(43,43,43,.06)}
+    .placeholder-center .smallcap{display:block;color:var(--orange-dark);font-size:9px}.placeholder-center strong{font-family:var(--serif);display:block;font-size:clamp(16px,2vw,24px);margin-top:5px}
+    .portfolio-meta{display:flex;align-items:start;justify-content:space-between;gap:17px;padding:20px 3px 0}
+    .portfolio-meta h3{font-family:var(--serif);font-size:21px;font-weight:700;line-height:1.5}.portfolio-meta p{font-size:12px;color:var(--muted);margin-top:7px;line-height:1.8}
+    .portfolio-meta span{font-family:var(--serif);color:var(--orange-dark);font-size:17px}
+    .portfolio-foot{margin-top:52px;padding:20px 0;border-top:1px solid var(--line);display:flex;align-items:center;gap:12px;color:var(--muted);font-size:12px;line-height:1.8}
+    /* 07 / Pricing */
+    .pricing{background:#FCE8D6;position:relative;overflow:hidden}
+    .pricing::before{content:'';position:absolute;width:500px;height:500px;right:-190px;top:-230px;border:1px solid rgba(95,168,211,.18);border-radius:50%;box-shadow:0 0 0 75px rgba(95,168,211,.035),0 0 0 160px rgba(95,168,211,.02)}
+    .pricing-layout{display:grid;grid-template-columns:.9fr 1.1fr;gap:9%;align-items:center}
+    .pricing-left .section-intro{margin-top:24px}
+    .pricing-check{display:flex;align-items:center;gap:11px;margin-top:28px;font-size:13px;color:var(--muted)}
+    .pricing-panel{border-radius:27px;padding:36px;position:relative}
+    .pricing-panel-head{display:flex;justify-content:space-between;align-items:center;gap:15px;padding-bottom:24px;border-bottom:1px solid var(--line)}
+    .pricing-panel h3{font-family:var(--serif);font-size:24px;font-weight:700}
+    .pending-pill{border-radius:99px;padding:7px 12px;background:rgba(242,140,56,.13);color:var(--orange-dark);font-size:11px;font-weight:700}
+    .skeleton-row{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:center;padding:24px 0;border-bottom:1px solid var(--line)}
+    .skeleton-row b{font-weight:600;font-size:13px;color:#2B2B2B}.skeleton-lines{display:grid;gap:7px}
+    .skeleton-lines span{display:block;height:8px;border-radius:15px;background:linear-gradient(90deg,#FCE8D6,#FBF5EC)}
+    .skeleton-lines span:nth-child(2){width:66%}
+    .pricing-panel-footer{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-top:26px;font-size:12px;color:var(--muted)}
+    /* 08 / Process */
+    .process{background:var(--paper);overflow:hidden}
+    .process-head{display:flex;justify-content:space-between;align-items:end;gap:25px}
+    .draft-note{display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:30px;background:#EAF5F9;color:#2B2B2B;font-size:11px;font-weight:700}
+    .process-journey{position:relative;margin-top:84px}
+    .journey-svg{position:absolute;width:100%;height:110px;left:0;top:8px;overflow:visible;pointer-events:none}
+    .process-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:25px;position:relative;z-index:1}
+    .process-step{position:relative;padding-top:151px}
+    .process-dot{position:absolute;top:0;left:0;width:80px;height:80px;border:1px solid rgba(95,168,211,.45);border-radius:50%;display:grid;place-items:center;background:var(--paper);box-shadow:0 10px 35px rgba(95,168,211,.08)}
+    .process-dot svg{width:29px;height:29px;color:var(--blue-dark)}
+    .process-step:nth-child(odd) .process-dot{top:6px}.process-step:nth-child(even) .process-dot{top:30px}
+    .process-step:nth-child(even){padding-top:178px}
+    .process-step .num{font-size:11px;color:var(--orange-dark);letter-spacing:.18em;font-weight:700}
+    .process-step h3{font-family:var(--serif);font-size:21px;font-weight:700;margin-top:13px}
+    .process-step p{font-size:12px;color:var(--muted);line-height:2;margin-top:11px}
+    .process-caption{margin-top:47px;font-size:12px;color:var(--muted);line-height:2}
+    /* 09 / About */
+    .about{background:var(--cream);overflow:hidden}
+    .about-hero{display:grid;grid-template-columns:.86fr 1.14fr;align-items:center;gap:9%}
+    .portrait-frame{height:620px;border-radius:290px 290px 22px 22px;background:linear-gradient(165deg,#FCE8D6 1%,#EAF5F9 80%);border:1px solid rgba(255,255,255,.85);position:relative;overflow:hidden;box-shadow:var(--shadow);display:grid;place-items:center}
+    .portrait-circle{width:78%;aspect-ratio:1;border-radius:50%;border:1px solid rgba(95,168,211,.35);box-shadow:0 0 0 55px rgba(255,255,255,.19),0 0 0 110px rgba(255,255,255,.12);display:grid;place-items:center;transform:rotate(-13deg)}
+    .portrait-fish{width:72%;color:var(--orange);opacity:.82}
+    .portrait-placeholder{position:absolute;bottom:28px;left:26px;right:26px;text-align:center;padding:15px;background:rgba(255,255,255,.72);backdrop-filter:blur(12px);border-radius:12px;color:#2B2B2B;font-size:12px;letter-spacing:.08em;border:1px solid rgba(255,255,255,.7)}
+    .portrait-stamp{position:absolute;top:68px;right:32px;border:1px solid rgba(43,43,43,.4);border-radius:50%;width:103px;height:103px;display:grid;place-items:center;text-align:center;transform:rotate(12deg);color:#2B2B2B;font-size:11px;line-height:1.85}
+    .about-name{display:flex;gap:14px;align-items:baseline;flex-wrap:wrap;margin-top:33px}
+    .about-name strong{font-family:var(--serif);font-size:clamp(33px,3vw,47px);font-weight:700}.about-name span{font-size:14px;color:var(--muted)}
+    .about-title{font-size:12px;font-weight:700;color:var(--orange-dark);margin-top:9px;letter-spacing:.055em}
+    .about-lead{font-size:16px;line-height:2.25;color:#2B2B2B;margin-top:26px;max-width:650px}
+    .about-numbers{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:46px;padding-top:30px;border-top:1px solid var(--line)}
+    .about-number strong{display:block;font-family:var(--serif);font-size:clamp(30px,3.3vw,44px);font-weight:800;letter-spacing:-.05em}.about-number span{font-size:11px;color:var(--muted);line-height:1.7}
+    .about-features{margin-top:116px}
+    .about-feature-head{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:end;margin-bottom:40px}
+    .about-feature-head p{max-width:480px;color:var(--muted);font-size:14px;line-height:2.05;justify-self:end}
+    .feature-list{border-top:1px solid var(--line)}
+    .feature-row{display:grid;grid-template-columns:90px .9fr 1.2fr;gap:20px;padding:34px 4px;border-bottom:1px solid var(--line);align-items:start}
+    .feature-row .number{font-family:var(--serif);font-size:29px;color:var(--orange-dark)}
+    .feature-row h3{font-family:var(--serif);font-size:20px;font-weight:700;line-height:1.65;padding-right:10px}
+    .feature-row .body{font-size:13px;line-height:2.2;color:#2B2B2B}
+    .feature-row .body p+p{margin-top:12px}
+    .feature-row:nth-child(3) .body p:last-child,.feature-row:nth-child(4) .body p:last-child{border-left:2px solid var(--orange);padding-left:14px;color:#2B2B2B;font-size:12px}
+    .about-signoff{margin-top:42px;display:flex;justify-content:space-between;align-items:center;gap:25px}
+    .about-signoff em{font-family:var(--serif);font-size:20px;font-style:normal;color:var(--orange-dark)}
+    /* 10 / FAQ */
+    .faq{background:#FBF5EC}
+    .faq-layout{display:grid;grid-template-columns:.8fr 1.2fr;gap:11%}
+    .faq-layout .section-intro{margin-top:20px}
+    .faq-panel{border-top:1px solid var(--line)}
+    .faq-question{width:100%;display:flex;align-items:center;justify-content:space-between;text-align:left;gap:20px;padding:24px 3px;background:transparent;border:0;cursor:pointer;font-weight:700;font-size:16px;color:var(--ink)}
+    .faq-question .faq-plus{display:grid;place-items:center;width:31px;height:31px;flex-shrink:0;border-radius:50%;border:1px solid var(--line);font-size:19px;font-weight:400;transition:transform .28s}
+    .faq-question[aria-expanded="true"] .faq-plus{transform:rotate(45deg);background:rgba(242,140,56,.13)}
+    .faq-answer{display:grid;grid-template-rows:0fr;transition:grid-template-rows .32s var(--ease)}
+    .faq-answer[data-open="true"]{grid-template-rows:1fr}
+    .faq-answer-inner{overflow:hidden;font-size:13px;color:var(--muted);line-height:2.2}
+    .faq-answer-inner p{padding:0 3px 25px}
+    .faq-mini{font-size:12px;color:var(--muted);padding:20px 3px;border-top:1px solid var(--line);line-height:1.9}
+    /* 11 / Contact */
+    .contact{position:relative;overflow:hidden;padding-block:115px;background:radial-gradient(circle at 75% 45%,rgba(95,168,211,.24),transparent 33%),linear-gradient(145deg,#FBF5EC,#FBF5EC 55%,#EAF5F9)}
+    .contact-inner{position:relative;display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:6%;z-index:1}
+    .contact-kicker{color:var(--orange-dark)}
+    .contact h2{font-family:var(--serif);font-size:clamp(37px,5.2vw,73px);font-weight:800;letter-spacing:-.06em;line-height:1.38;margin:25px 0}
+    .contact p{color:#2B2B2B;font-size:15px;line-height:2.15;max-width:520px}
+    .contact-art{position:relative;height:435px;display:grid;place-items:center}
+    .contact-ring{position:absolute;width:min(100%,400px);aspect-ratio:1;border-radius:50%;border:1px solid rgba(95,168,211,.35);box-shadow:0 0 0 34px rgba(255,255,255,.15),0 0 0 72px rgba(255,255,255,.15),inset 0 0 90px rgba(95,168,211,.13);background:radial-gradient(circle,rgba(255,255,255,.4),rgba(95,168,211,.3));transform:rotate(-15deg)}
+    .contact-fish{width:75%;color:var(--orange);animation:fish-float 8s ease-in-out infinite}
+    .contact-bubble{position:absolute;border:1px solid rgba(95,168,211,.3);border-radius:50%;background:rgba(255,255,255,.44)}
+    .contact-bubble.a{width:25px;height:25px;top:13%;left:20%}.contact-bubble.b{width:14px;height:14px;top:8%;left:38%}.contact-bubble.c{width:33px;height:33px;bottom:12%;right:8%}
+    .contact-cta-wrap{margin-top:29px;display:inline-flex;flex-direction:column;align-items:start;gap:10px}
+    .contact-btn{position:relative;min-height:66px;background:linear-gradient(var(--cream),var(--cream)) padding-box,linear-gradient(110deg,var(--orange),var(--blue)) border-box;border:1.5px solid transparent;box-shadow:0 15px 39px rgba(95,168,211,.12);padding:14px 29px;color:var(--ink)}
+    .contact-btn:hover,.contact-btn:focus-visible{box-shadow:0 16px 36px rgba(95,168,211,.3)}
+    .contact-status{font-size:11px;color:var(--blue-dark);min-height:20px;opacity:0;transform:translateY(-5px);transition:opacity .3s,transform .3s}
+    .contact-cta-wrap:hover .contact-status,.contact-cta-wrap:focus-within .contact-status{opacity:1;transform:translateY(0)}
+    /* 12 / Footer */
+    .footer{background:#2B2B2B;color:#FBF5EC;padding-top:67px}
+    .footer-top{display:flex;justify-content:space-between;gap:30px;padding-bottom:75px}
+    .footer .brand-mark{color:var(--orange);width:53px}
+    .footer .brand-cn{font-size:24px}.footer .brand-en{color:#5FA8D3}
+    .footer-slogan{font-family:var(--serif);font-size:clamp(19px,2.1vw,29px);margin-top:28px;color:#FCE8D6}
+    .footer-nav{display:flex;flex-wrap:wrap;gap:15px 23px;max-width:390px;justify-content:flex-end;align-content:start}
+    .footer-nav a{font-size:12px;color:#FCE8D6;transition:color .2s}.footer-nav a:hover{color:var(--orange)}
+    .footer-bottom{border-top:1px solid rgba(255,255,255,.15);min-height:79px;display:flex;align-items:center;justify-content:space-between;gap:25px;color:#5FA8D3;font-size:11px;letter-spacing:.04em}
+    .footer-bottom a{display:flex;align-items:center;gap:8px;color:#FCE8D6}
+    /* 13 / Ambient roaming fish */
+    .traveler{position:fixed;left:0;bottom:13%;width:110px;height:75px;color:var(--orange);opacity:0;z-index:5;pointer-events:none;animation:travel 49s linear infinite;animation-delay:12s}
+    @keyframes travel{0%,17%{opacity:0;transform:translateX(-150px) translateY(0)}20%{opacity:.17}43%{opacity:.17}48%,100%{opacity:0;transform:translateX(calc(100vw + 160px)) translateY(-68px)}}
+    .no-motion .traveler,.no-motion .orb{display:none}
+    /* 14 / Responsive */
+    @media(max-width:1180px){
+      .page-wrap{width:min(calc(100% - 76px),var(--wrap))}
+      .desktop-nav{gap:14px}.desktop-nav a{font-size:11px}.nav-cta{padding:9px 13px}.brand-cn{font-size:17px}.brand-mark{width:41px}
+      .hero-inner{grid-template-columns:1.05fr .95fr}.hero-art{min-height:440px}.hero-h1{font-size:clamp(43px,5.6vw,70px)}
+      .scroll-cue{left:38px}.service-feature{padding:28px}.service-card{padding:25px}
+      .feature-row{grid-template-columns:65px .93fr 1.1fr}
+    }
+    @media(max-width:930px){
+      .page-wrap{width:min(calc(100% - 56px),var(--wrap))}.section-pad{padding-block:92px}
+      .desktop-nav,.header .nav-cta{display:none}.menu-toggle{display:flex}
+      .nav-shell{height:76px}
+      .mobile-nav{position:fixed;top:76px;left:0;right:0;display:block;background:rgba(255,255,255,.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--line);box-shadow:0 16px 20px rgba(43,43,43,.05);visibility:hidden;opacity:0;transform:translateY(-9px);pointer-events:none;transition:opacity .25s,transform .25s,visibility 0s linear .25s}
+      .mobile-nav.open{visibility:visible;opacity:1;transform:translateY(0);pointer-events:auto;transition:opacity .25s,transform .25s,visibility 0s}
+      .mobile-nav-inner{width:min(calc(100% - 56px),var(--wrap));margin:auto;padding:17px 0 25px;display:grid}
+      .mobile-nav a:not(.btn){display:block;padding:12px 2px;border-bottom:1px solid var(--line);font-size:14px;font-weight:600}.mobile-nav .btn{margin-top:18px;justify-self:start}
+      .hero{min-height:auto;padding-top:76px}.hero-inner{grid-template-columns:1fr;gap:2px;padding-top:77px;padding-bottom:91px}
+      .hero-copy{max-width:720px}.hero-h1{font-size:clamp(49px,8.8vw,81px);max-width:680px}.hero-art{width:min(100%,580px);min-height:auto;aspect-ratio:1;margin:5px auto -10px}
+      .scroll-cue{display:none}.art-ambient{width:90%}.hero-stats{margin-top:43px}
+      .service-grid{grid-template-columns:1fr 1fr}.service-feature{grid-column:1 / -1;grid-row:auto;min-height:390px}.service-feature h3{max-width:unset}
+      .feature-fish{position:absolute;right:0;bottom:12px;width:45%;height:175px}.service-feature p{max-width:420px}
+      .service-grid .service-card{min-height:240px}.services-head{align-items:start}
+      .values-intro{grid-template-columns:1fr 1.5fr;gap:36px}
+      .value-row{grid-template-columns:60px 1fr;gap:12px 20px}.value-row p{grid-column:2}
+      .process-steps{gap:15px}.process-step h3{font-size:17px}.process-step p{font-size:11px}
+      .about-hero{gap:6%}.portrait-frame{height:515px}.about-feature-head{grid-template-columns:1fr}
+      .about-feature-head p{justify-self:start}
+      .contact-art{height:330px}
+    }
+    @media(max-width:700px){
+      html{scroll-padding-top:76px}.page-wrap{width:min(calc(100% - 36px),var(--wrap))}
+      .section-pad{padding-block:77px}.section-heading{font-size:clamp(31px,8.2vw,43px)}
+      .hero-inner{padding-top:61px;padding-bottom:67px}.hero-h1{font-size:clamp(41px,10.8vw,65px);letter-spacing:-.075em;margin:30px 0 20px}
+      .hero-subtitle{font-size:15px;min-height:90px}.hero-actions{margin-top:27px;gap:9px}.hero-actions .btn{width:100%}
+      .hero-stats{margin-top:47px;width:100%;justify-content:space-between}.stat{padding-inline:16px}.stat strong{font-size:27px}.stat span{font-size:10px}
+      .hero-art{width:min(100%,455px);margin:17px auto -22px}.art-label.a{left:0;font-size:8px}.art-label.b{right:1%;font-size:8px}.ring-text{width:70px;height:70px;font-size:8px}
+      .services-head{display:block;margin-bottom:30px}.services-aside{margin-top:28px;width:auto}
+      .service-grid{grid-template-columns:1fr;grid-template-rows:auto;gap:13px}.service-feature{grid-column:auto;min-height:440px;padding:29px}.service-feature h3{font-size:34px}.feature-fish{width:68%;height:150px}
+      .service-card{min-height:208px!important;padding:24px}.service-card h3{font-size:23px}
+      .values-intro{grid-template-columns:1fr;gap:4px;margin-top:70px}.values-intro h3{font-size:30px}.value-row{grid-template-columns:45px 1fr}.value-row h4{font-size:18px}.value-row p{font-size:13px}.value-row .num{font-size:25px}
+      .service-end{display:block}.service-end .btn{margin-top:24px}
+      .portfolio-head{display:block}.portfolio-note{text-align:left;margin-top:20px}.portfolio-grid{grid-template-columns:1fr;gap:32px}
+      .portfolio-item:nth-child(2){margin-top:0}.portfolio-item:nth-child(3){grid-column:auto;width:100%;margin-top:0}.portfolio-item:nth-child(2) .portfolio-art{aspect-ratio:1.3}.portfolio-item:nth-child(3) .portfolio-art{aspect-ratio:1.3}
+      .portfolio-meta h3{font-size:19px}.portfolio-foot{align-items:start}
+      .pricing-layout{grid-template-columns:1fr;gap:34px}.pricing-panel{padding:26px}.pricing-panel h3{font-size:20px}
+      .process-head{display:block}.draft-note{margin-top:22px}
+      .journey-svg{display:none}.process-journey{margin-top:42px}
+      .process-steps{display:block;position:relative;padding-left:45px}
+      .process-steps::before{content:'';position:absolute;top:26px;bottom:58px;left:19px;border-left:1px dashed rgba(95,168,211,.65)}
+      .process-step,.process-step:nth-child(even){padding:0 0 41px 25px;min-height:106px}
+      .process-dot,.process-step:nth-child(odd) .process-dot,.process-step:nth-child(even) .process-dot{left:-45px;top:0;width:40px;height:40px}
+      .process-dot svg{width:18px;height:18px}.process-step h3{font-size:20px;margin-top:7px}.process-step p{font-size:12px;max-width:340px;margin-top:5px}.process-caption{margin-top:7px}
+      .about-hero{grid-template-columns:1fr;gap:42px}.portrait-frame{height:460px;max-width:420px;width:100%;margin:auto}
+      .portrait-stamp{width:82px;height:82px;top:40px;right:23px;font-size:9px}.about-name{margin-top:27px}.about-lead{font-size:15px}.about-numbers{margin-top:30px}
+      .about-features{margin-top:76px}.feature-row{grid-template-columns:45px 1fr;gap:6px 14px;padding:25px 0}
+      .feature-row .number{font-size:24px}.feature-row h3{font-size:18px}.feature-row .body{grid-column:2;font-size:13px}
+      .about-signoff{display:block}.about-signoff em{font-size:18px}.about-signoff span{display:block;margin-top:13px;font-size:12px}
+      .faq-layout{grid-template-columns:1fr;gap:30px}.faq-question{font-size:15px}
+      .contact{padding-block:75px}.contact-inner{grid-template-columns:1fr}.contact h2{font-size:clamp(37px,9vw,58px)}.contact-art{height:300px;width:100%;order:-1;margin-bottom:22px}
+      .contact-ring{width:min(73%,310px)}.contact-fish{width:68%}.contact-cta-wrap{width:100%;max-width:430px}.contact-btn{width:100%}
+      .footer-top{display:block;padding-bottom:48px}.footer-nav{justify-content:flex-start;max-width:none;margin-top:36px}.footer-bottom{align-items:start;flex-direction:column;justify-content:center;padding-block:22px;gap:15px}
+      .traveler{display:none}
+    }
+    @media(max-width:370px){
+      .brand-cn{font-size:16px}.brand-mark{width:36px}.brand-en{font-size:8px}
+      .hero-h1{font-size:39px}.eyebrow{font-size:9px}.stat{padding-inline:9px}.stat strong{font-size:24px}.stat span{font-size:9px}
+      .service-feature h3{font-size:30px}.pricing-panel{padding:20px}.skeleton-row{grid-template-columns:.9fr 1.1fr}
+    }
+    /* 15 / Accessibility & hidden tab suspension */
+    @media(prefers-reduced-motion:reduce){
+      *,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition-duration:.01ms!important}
+      .js .reveal:not(.is-visible){opacity:1;transform:none}
+      .js .hero-subtitle:not(.is-shown){opacity:1;transform:none}
+      .traveler{display:none}
+    }
+    body.page-hidden .traveler,body.page-hidden .hero-fish,body.page-hidden .contact-fish,body.page-hidden .orb,body.page-hidden .fish-fin{animation-play-state:paused}
+    /* Core services and added value */
+    .core-services{background:var(--paper)}
+    .core-services .section-heading{margin:0 0 22px}
+    .core-services .section-intro{margin:0 0 44px}
+    .core-service-list{border-top:1px solid var(--line)}
+    .core-service-row{display:grid;grid-template-columns:1fr 1fr 1.25fr;gap:30px;align-items:start;padding:29px 0;border-bottom:1px solid var(--line)}
+    .core-service-name{display:flex;align-items:center;gap:17px;min-width:0}
+    .core-service-icon{display:grid;place-items:center;flex:0 0 46px;height:46px;border-radius:14px;background:#EAF5F9;color:var(--blue-dark);font-size:20px}
+    .core-service-row:nth-child(even) .core-service-icon{background:#FCE8D6;color:var(--orange-dark)}
+    .core-service-name h3{font-family:var(--serif);font-size:20px;line-height:1.6;font-weight:700;margin:5px 0}
+    .core-service-row p{margin:0;font-size:14px;line-height:2;overflow-wrap:anywhere}
+    .core-service-pain{color:var(--muted)}
+    .core-service-label{display:block;font-size:10px;font-weight:700;letter-spacing:.12em;color:var(--orange-dark);margin-bottom:5px}
+    @media(max-width:930px){.core-service-row{grid-template-columns:1fr 1fr;gap:18px 25px}.core-service-name{grid-column:1 / -1}}
+    @media(max-width:600px){.core-service-row{grid-template-columns:minmax(0,1fr);gap:16px;padding:25px 0}.core-service-name{grid-column:auto}.core-service-name h3{font-size:19px}}
+    /* Contact channels and project inquiry */
+    .contact-me{background:var(--cream)}
+    .contact-me-layout{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+    .contact-me .section-heading{margin:0 0 22px}
+    .contact-me .section-intro{margin:0}
+    .social-channels{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:30px;padding:0;list-style:none}
+    .social-channel{display:flex;flex-direction:column;align-items:center;gap:10px;padding:20px 8px;border:1px solid var(--line);border-radius:18px;background:var(--paper);text-align:center}
+    .social-channel i{font-size:28px;line-height:1.2}
+    .social-channel strong{font-size:12px;font-weight:600}
+    .social-channel span{font-size:10px;color:var(--muted)}
+    .social-line{color:#2B2B2B}.social-facebook{color:#5FA8D3}.social-linkedin{color:#5FA8D3}.social-github{color:#2B2B2B}
+    .inquiry-card{padding:40px;border-radius:26px;background:var(--paper);border:1px solid var(--line);box-shadow:var(--shadow)}
+    .inquiry-icon{display:grid;place-items:center;width:52px;height:52px;border-radius:16px;background:#FCE8D6;color:var(--orange-dark);font-size:24px;margin-bottom:24px}
+    .inquiry-card h3{font-family:var(--serif);font-size:28px;font-weight:700;line-height:1.5;margin:0 0 16px}
+    .inquiry-card p{color:var(--muted);font-size:14px;line-height:2;margin:0 0 24px}
+    .inquiry-card .btn i{font-size:14px}
+    .inquiry-card .inquiry-note{display:block;margin-top:14px;color:var(--muted);font-size:11px;line-height:1.8}
+    @media(max-width:930px){.contact-me-layout{grid-template-columns:minmax(0,1fr);gap:30px}}
+    @media(max-width:600px){.social-channels{grid-template-columns:repeat(2,minmax(0,1fr))}.inquiry-card{padding:28px}.inquiry-card .btn{width:100%}}
+    /* Palette from 色票.png: neutral 60%, brand 30%, accent 10%. */
+    :root{
+      --cream:#FBF5EC;--paper:#FFFFFF;--ink:#2B2B2B;
+      --orange:#F28C38;--blue:#5FA8D3;
+      --water:#EAF5F9;--mist:#FCE8D6;
+      --muted:rgba(43,43,43,.76);
+      --orange-dark:#2B2B2B;--blue-dark:#2B2B2B;
+      --line:rgba(43,43,43,.13);--glass:rgba(255,255,255,.68);
+      --shadow:0 22px 70px rgba(43,43,43,.09);
+    }
+    .section-kicker::before{background:var(--orange)}
+    .brand-mark,.scribble{color:var(--orange)}
+    .btn-primary{background:var(--orange);color:var(--ink)}
+    .btn-primary:hover{background:var(--mist);color:var(--ink)}
+    .btn-outline{border-color:var(--blue);color:var(--ink);background:transparent}
+    .btn-outline:hover{background:var(--water);border-color:var(--blue)}
+    :focus-visible{outline-color:var(--ink)}
+    .service-feature{background:linear-gradient(145deg,var(--water),var(--paper))}
+    .service-card:nth-child(2),.service-card:nth-child(5){background:var(--mist)}
+    .service-card:nth-child(3){background:var(--cream)}
+    .service-card:nth-child(4){background:var(--water)}
+    .contact{background:radial-gradient(circle at 75% 45%,rgba(95,168,211,.24),transparent 33%),linear-gradient(145deg,var(--cream),var(--paper) 55%,var(--water))}
+    .contact-btn{background:var(--orange);border:1.5px solid var(--orange);color:var(--ink);box-shadow:0 10px 25px rgba(242,140,56,.22)}
+    .contact-btn:hover,.contact-btn:focus-visible{background:var(--mist);border-color:var(--orange);box-shadow:0 16px 32px rgba(242,140,56,.25)}
+    .core-service-icon{background:var(--water);color:var(--ink)}
+    .core-service-row:nth-child(even) .core-service-icon,.inquiry-icon{background:var(--mist);color:var(--ink)}
+    .social-channel{background:var(--paper);border-color:var(--line)}
+    .social-channel i{color:var(--ink)}
+    .social-channel:nth-child(odd){background:var(--water)}
+    .social-channel:nth-child(even){background:var(--mist)}
+    .footer{background:var(--ink);color:var(--cream)}
+    .footer .brand-en,.footer-nav a,.footer-bottom{color:rgba(255,255,255,.78)}
+    .footer-slogan,.footer-bottom a{color:var(--cream)}
+    .footer-nav a:hover{color:var(--orange)}
+    .footer a:focus-visible{outline-color:var(--blue)}
+  </style>
+</head>
+<body class="paper-noise">
+  <a class="skip-link" href="#main">跳至主要內容</a>
+
+  <!-- Reusable hand-drawn fish mark. Accessible instances supply their own labels or are decorative. -->
+  <svg aria-hidden="true" width="0" height="0" style="position:absolute;overflow:hidden" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="fish-mark" viewBox="0 0 350 210">
+      <g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M118 106C149 56 233 52 290 101C256 156 168 166 118 106Z"/>
+        <path d="M120 106C88 85 66 65 48 62C60 92 61 119 47 148C73 146 103 127 120 106Z"/>
+        <path d="M168 69C181 38 209 25 234 30C230 45 222 54 209 62"/>
+        <path d="M173 144C186 162 211 175 239 166C230 157 226 152 218 149"/>
+        <path d="M276 91C263 109 263 116 280 128" stroke-width="2.5"/>
+        <path d="M136 104C171 91 198 90 227 105" stroke-opacity=".25" stroke-width="2"/>
+        <circle cx="256" cy="96" r="3.5" fill="currentColor" stroke="none"/>
+        <path d="M293 113q11 4 19-2" stroke-width="2.3"/>
+      </g>
+    </symbol>
+    <symbol id="icon-arrow" viewBox="0 0 24 24"><path d="M5 18 18 5M7 5h11v11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="icon-wave" viewBox="0 0 24 24"><path d="M2 13c3-6 5 6 9 0s6-6 11 0M2 19c3-6 5 6 9 0s6-6 11 0M2 7c3-6 5 6 9 0s6-6 11 0" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+    <symbol id="icon-spark" viewBox="0 0 24 24"><path d="m12 2 2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4L12 2Z" stroke="currentColor" fill="none" stroke-width="1.5"/></symbol>
+    <symbol id="icon-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="13" y="3" width="8" height="8" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="3" y="13" width="8" height="8" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="13" y="13" width="8" height="8" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+    <symbol id="icon-chat" viewBox="0 0 24 24"><path d="M4 6h16v11H9l-5 4V6Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M8 10h8m-8 3h6" stroke="currentColor" stroke-width="1.5"/></symbol>
+    <symbol id="icon-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="m15.8 8.2-2.3 5.3-5.3 2.3 2.3-5.3Z" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
+    <symbol id="icon-pen" viewBox="0 0 24 24"><path d="m4 20 4.5-1 11-11-3.5-3.5-11 11L4 20Zm10-13 3.5 3.5M3 21h18" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.5"/></symbol>
+    <symbol id="icon-check" viewBox="0 0 24 24"><path d="m4 13 5 5L20 6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"/></symbol>
+    <symbol id="icon-chart" viewBox="0 0 24 24"><path d="M4 20V4m0 16h16M7 15l4-5 4 2 5-7" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.6"/></symbol>
+    <symbol id="icon-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+    <symbol id="icon-close" viewBox="0 0 24 24"><path d="m5 5 14 14M19 5 5 19" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+  </svg>
+
+  <!-- Header / primary navigation -->
+  <header class="header" id="header">
+    <div class="page-wrap nav-shell">
+      <a class="brand" href="#top" aria-label="摸魚設計工作室，返回首頁">
+        <svg class="brand-mark" aria-hidden="true"><use href="#fish-mark"></use></svg>
+        <span><span class="brand-cn block">摸魚設計</span><span class="brand-en block">SLACKER FISH STUDIO</span></span>
+      </a>
+      <nav class="desktop-nav" aria-label="主要導覽">
+        <a href="#services">服務與價值</a>
+        <a href="#portfolio">作品案例</a>
+        <a href="#pricing">價格方案</a>
+        <a href="#process">合作流程</a>
+        <a href="#about">關於我</a>
+        <a href="#faq">常見問答</a>
+      </nav>
+      <a class="btn btn-primary nav-cta" href="https://calendar.app.google/TrtrYgJL4e9jGqE57" target="_blank" rel="noopener noreferrer">預約摸魚諮詢 <svg aria-hidden="true"><use href="#icon-arrow"></use></svg></a>
+      <button class="menu-toggle" type="button" id="menuToggle" aria-expanded="false" aria-controls="mobileNav" aria-label="開啟導覽選單"><svg aria-hidden="true"><use id="menuIcon" href="#icon-menu"></use></svg></button>
+    </div>
+    <nav class="mobile-nav" id="mobileNav" aria-label="手機導覽" inert>
+      <div class="mobile-nav-inner">
+        <a href="#services">服務與價值</a><a href="#portfolio">作品案例</a><a href="#pricing">價格方案</a><a href="#process">合作流程</a><a href="#about">關於我</a><a href="#faq">常見問答</a>
+        <a class="btn btn-primary" href="https://calendar.app.google/TrtrYgJL4e9jGqE57" target="_blank" rel="noopener noreferrer">預約摸魚諮詢 <svg aria-hidden="true" width="17" height="17"><use href="#icon-arrow"></use></svg></a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- Section 01 / Typographic hero and glass aquarium art -->
+    <section class="hero" id="top" aria-labelledby="heroTitle">
+      <div class="page-wrap hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="dot" aria-hidden="true"></span> INDEPENDENT CREATIVE STUDIO <span style="opacity:.4">/</span> HSINCHU</p>
+          <h1 class="hero-h1" id="heroTitle">
+            <span class="sr-only">認真摸魚，用心設計。</span>
+            <span class="headline-space" aria-hidden="true"><span class="headline-ghost">認真摸魚，<br>用心設計。</span><span class="headline-type"><span class="headline-typed" id="typedTitle">認真摸魚，<br>用心設計。</span></span></span>
+          </h1>
+          <p class="hero-subtitle is-shown" id="heroSubtitle">截稿前 3 秒交件，誤差不超過 1 秒。專為新竹小店與新創打造會賺錢的品牌與網站。</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="https://calendar.app.google/TrtrYgJL4e9jGqE57" target="_blank" rel="noopener noreferrer">預約免費 30 分鐘摸魚諮詢 <svg aria-hidden="true"><use href="#icon-arrow"></use></svg></a>
+            <a class="btn btn-outline" href="#portfolio">看看作品案例 <svg aria-hidden="true"><use href="#icon-arrow"></use></svg></a>
+          </div>
+          <div class="hero-stats" aria-label="工作室經驗數據">
+            <div class="stat"><strong>60+</strong><span>合作品牌</span></div>
+            <div class="stat"><strong>8年</strong><span>經驗</span></div>
+            <div class="stat"><strong>7成</strong><span>回頭客</span></div>
+          </div>
+        </div>
+        <div class="hero-art" id="heroArt" aria-hidden="true">
+          <div class="art-ambient"></div><div class="aquarium">
+            <div class="aquarium-halo"></div><div class="aquarium-glass"></div>
+            <svg class="hero-water" viewBox="0 0 540 260" fill="none" aria-hidden="true"><path d="M-40 129C70 32 144 238 250 129S435 63 570 131" stroke="#5FA8D3" stroke-width="1.1" stroke-opacity=".34"/><path d="M-40 143C70 46 144 252 250 143S435 77 570 145" stroke="#5FA8D3" stroke-width="1" stroke-opacity=".2"/><path d="M-40 112C70 15 144 221 250 112S435 46 570 114" stroke="#5FA8D3" stroke-width=".8" stroke-opacity=".12"/></svg>
+            <svg class="hero-fish" viewBox="0 0 350 210"><use href="#fish-mark"></use><g class="fish-fin" fill="none" stroke="currentColor" stroke-width="2" opacity=".38"><path d="M162 97q-9 22 13 39q29-11 29-36"/></g></svg>
+            <div class="orb one"></div><div class="orb two"></div><div class="orb three"></div><div class="orb four"></div><div class="orb five"></div>
+          </div>
+          <span class="art-label a">A LITTLE FISH<br>WITH BIG IDEAS.</span>
+          <span class="art-label b">GOOD DESIGN.<br>GOOD BUSINESS.</span>
+          <div class="ring-text">有策略地<br>摸魚 ↗</div><span class="art-serial">STUDIO EXPERIMENT NO. 001</span>
+        </div>
+      </div>
+      <span class="scroll-cue" aria-hidden="true">SCROLL TO EXPLORE</span>
+    </section>
+
+    <!-- Section 02 / Services and four original strategic differentiators -->
+    <section class="services section-pad" id="services" aria-labelledby="servicesTitle">
+      <div class="page-wrap">
+        <div class="services-head reveal">
+          <div><p class="section-kicker smallcap">01 — WHAT WE DO</p><h2 class="section-heading" id="servicesTitle">讓小品牌用聰明的方法，<br><span class="handline">創造大品牌的影響力。</span></h2></div>
+          <div class="services-aside"><div class="decor-line"></div>AI 賦能 × 品牌策略 × 數據成效<br>「預算可以有限，品牌的可能性不該受限。」</div>
+        </div>
+        <div class="service-grid">
+          <article class="service-feature hoverglass reveal">
+            <div><span class="index">THE BIG IDEA / 001</span><h3>把繁瑣交給 AI，<br>把獨特留給你。</h3><p>在摸魚設計工作室 Slacker Fish Studio，我們相信 AI 不只是提升效率的工具，更是協助小品牌突破資源限制、加速成長的創意夥伴。</p><p>我們結合 AI 智慧工具、品牌策略與設計專業，讓每一分預算都花在真正有價值的地方。</p></div>
+            <svg class="feature-fish" viewBox="0 0 350 210" aria-hidden="true"><use href="#fish-mark"></use></svg>
+          </article>
+          <article class="service-card hoverglass reveal"><div class="service-index">SERVICE / 01 <svg class="service-icon" aria-hidden="true"><use href="#icon-spark"></use></svg></div><div><h3>品牌策略與設計</h3><p>從品牌 DNA、定位到視覺識別，把真實的品牌特色變成被記住的理由。</p></div></article>
+          <article class="service-card hoverglass reveal"><div class="service-index">SERVICE / 02 <svg class="service-icon" aria-hidden="true"><use href="#icon-grid"></use></svg></div><div><h3>網站與數位設計</h3><p>不只做得好看，更讓顧客三秒看懂你、記住你，願意繼續探索。</p></div></article>
+          <article class="service-card hoverglass reveal"><div class="service-index">SERVICE / 03 <svg class="service-icon" aria-hidden="true"><use href="#icon-wave"></use></svg></div><div><h3>AI 解決方案</h3><p>結合 AI 智慧工具、內容生成與操作教學，降低技術門檻與重複工作。</p></div></article>
+          <article class="service-card hoverglass reveal"><div class="service-index">OUR PROMISE / 04 <svg class="service-icon" aria-hidden="true"><use href="#icon-chart"></use></svg></div><div><h3>商業成效導向</h3><p>讓策略與設計連結商業目標，以可追蹤的數據理解品牌投資。</p></div></article>
+        </div>
+        <div class="values-intro reveal"><p class="section-kicker smallcap">WHY SLACKER FISH?</p><div><h3>摸魚不是偷懶，而是懂得用更聰明的方法，把事情做到最好。</h3><p>好的設計不只是好看，更是讓客人三秒看懂你、記住你，然後願意掏錢。</p></div></div>
+        <div class="value-rows">
+          <article class="value-row reveal"><span class="num">01</span><h4>精準策略，<br>一次做對不燒預算</h4><p>設計之前先深入訪談，運用 AI 輔助市場分析、品牌定位與創意發想，減少反覆修改的時間成本。平均僅需 1.8 次改稿即可定案，讓預算投入真正重要的事。</p></article>
+          <article class="value-row reveal"><span class="num">02</span><h4>挖掘品牌 DNA，<br>打造無法複製的特色</h4><p>最有價值的品牌故事，往往藏在老闆自己身上。我們透過訪談與 AI 輔助內容策劃，找出品牌獨特魅力。從捲髮阿嬤到巷口小店，讓顧客三秒看懂、留下印象，進而產生消費意願。</p></article>
+          <article class="value-row reveal"><span class="num">03</span><h4>數據驅動，<br>讓設計成果看得見</h4><p>不只追求視覺美感，更重視實際商業成效。每個專案皆設定關鍵績效指標（KPI），並於上線三個月後提供成效回報，讓品牌投資有數據可追蹤、有成果可驗證。</p></article>
+          <article class="value-row reveal"><span class="num">04</span><h4>AI 賦能，<br>讓品牌真正自主經營</h4><p>從網站建置、內容生成到日常數位營運，提供簡單易懂的操作教學與實用工具，降低技術門檻。即使不懂程式，也能輕鬆管理品牌內容，連阿嬤都能學會用平板接單。</p></article>
+        </div>
+        <div class="service-end reveal"><div><strong>讓 AI 做繁瑣的事，讓你專心做好生意。</strong><p>我們不只交付一套設計，更交付一套讓品牌持續成長的能力。</p><em>Slacker Fish Studio｜讓小預算，也能創造大影響力。</em></div><a href="https://calendar.app.google/TrtrYgJL4e9jGqE57" class="btn btn-outline" target="_blank" rel="noopener noreferrer">聊聊你的品牌 <svg aria-hidden="true"><use href="#icon-arrow"></use></svg></a></div>
+      </div>
+    </section>
+
+    <!-- Section 03 / Portfolio image slots. Deliberately NOT presented as real projects without source document. -->
+    <section class="portfolio section-pad" id="portfolio" aria-labelledby="portfolioTitle">
+      <div class="page-wrap">
+        <div class="portfolio-head reveal"><div><p class="section-kicker smallcap">02 — SELECTED WORK</p><h2 class="section-heading" id="portfolioTitle">好的作品，<br>會自己<span class="handline">說故事。</span></h2></div><p class="portfolio-note">每個品牌都值得被認真對待。以下為作品集版型預覽，正式案例與圖片將以《作品集素材_逗趣版.docx》為準。</p></div>
+        <div class="portfolio-grid">
+          <article class="portfolio-item reveal"><div class="portfolio-art placeholder-1">
+            <svg class="portfolio-graphic" viewBox="0 0 700 540" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><circle cx="320" cy="260" r="198" fill="none" stroke="#FCE8D6" stroke-width="1"/><path d="M0 424C149 169 390 624 700 204" fill="none" stroke="#5FA8D3" stroke-width="2"/><path d="M0 446C149 191 390 646 700 226" fill="none" stroke="#5FA8D3" stroke-opacity=".35"/><path d="M120 65h280v350H120z" fill="#FBF5EC" transform="rotate(-11 260 240)" opacity=".9"/><circle cx="350" cy="260" r="102" fill="#FCE8D6" opacity=".74"/><path d="M218 279h260M350 149v245" stroke="#F28C38" stroke-opacity=".4"/></svg>
+            <span class="placeholder-tag">CASE STUDY 001 / 待補</span><div class="placeholder-center"><span class="smallcap">PORTFOLIO MATERIAL NEEDED</span><strong>作品圖片待補</strong></div>
+          </div><div class="portfolio-meta"><div><h3>專案名稱待補</h3><p>產業類別・服務項目・設計理念・真實成果待補</p></div><span>01 ↗</span></div></article>
+          <article class="portfolio-item reveal"><div class="portfolio-art placeholder-2">
+            <svg class="portfolio-graphic" viewBox="0 0 580 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect x="125" y="80" width="340" height="420" rx="170" fill="#EAF5F9" stroke="#5FA8D3"/><rect x="165" y="120" width="260" height="340" rx="130" fill="#FBF5EC"/><path d="M-30 395Q175 180 590 300" stroke="#F28C38" stroke-width="75" opacity=".48" fill="none"/><circle cx="315" cy="298" r="123" stroke="#5FA8D3" fill="none" stroke-width="1"/><path d="M147 289c99-70 181 113 311-18" fill="none" stroke="#5FA8D3" stroke-width="2" opacity=".55"/></svg>
+            <span class="placeholder-tag">CASE STUDY 002 / 待補</span><div class="placeholder-center"><span class="smallcap">PORTFOLIO MATERIAL NEEDED</span><strong>作品圖片待補</strong></div>
+          </div><div class="portfolio-meta"><div><h3>專案名稱待補</h3><p>產業類別・服務項目・設計理念・真實成果待補</p></div><span>02 ↗</span></div></article>
+          <article class="portfolio-item reveal"><div class="portfolio-art placeholder-3">
+            <svg class="portfolio-graphic" viewBox="0 0 990 420" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><circle cx="165" cy="210" r="150" fill="#FCE8D6"/><circle cx="845" cy="180" r="167" fill="#EAF5F9"/><rect x="305" y="-40" width="360" height="490" transform="rotate(18 485 205)" fill="#FBF5EC" opacity=".8"/><path d="M-10 290Q218 40 470 200T1000 80" fill="none" stroke="#5FA8D3" stroke-opacity=".4" stroke-width="2"/><path d="M-10 314Q218 64 470 224T1000 104" fill="none" stroke="#5FA8D3" stroke-opacity=".2" stroke-width="2"/></svg>
+            <span class="placeholder-tag">CASE STUDY 003 / 待補</span><div class="placeholder-center"><span class="smallcap">PORTFOLIO MATERIAL NEEDED</span><strong>作品圖片待補</strong></div>
+          </div><div class="portfolio-meta"><div><h3>專案名稱待補</h3><p>產業類別・服務項目・設計理念・真實成果待補</p></div><span>03 ↗</span></div></article>
+        </div>
+        <p class="portfolio-foot"><svg aria-hidden="true" width="21" height="21" style="flex-shrink:0;color:var(--blue-dark)"><use href="#icon-compass"></use></svg> 素材狀態：尚未提供《作品集素材_逗趣版.docx》。本區僅顯示美術佔位，不代表已完成的商業案件，且未虛構任何專案成效。</p>
+      </div>
+    </section>
+
+    <!-- Section 04 / Pricing intentionally uses non-fictional data placeholders -->
+    <section class="pricing section-pad" id="pricing" aria-labelledby="pricingTitle">
+      <div class="page-wrap pricing-layout">
+        <div class="pricing-left reveal"><p class="section-kicker smallcap">03 — INVEST IN YOUR BRAND</p><h2 class="section-heading" id="pricingTitle">好的預算規劃，<br>從<span class="handline">透明開始。</span></h2><p class="section-intro">每個品牌都有不同階段與需求。正式價格、方案名稱與服務範圍將依《作品集素材_逗趣版.docx》的原文刊登，不自行新增價格或服務承諾。</p><div class="pricing-check"><svg width="20" height="20" aria-hidden="true" style="color:var(--blue-dark)"><use href="#icon-check"></use></svg> 現在可以先預約免費 30 分鐘摸魚諮詢</div></div>
+        <div class="pricing-panel glass reveal" aria-label="價格方案資料待補"><div class="pricing-panel-head"><h3>服務方案比較</h3><span class="pending-pill">價格資料待補</span></div>
+          <div class="skeleton-row"><b>方案名稱</b><div class="skeleton-lines" aria-label="資料待補"><span></span><span></span></div></div>
+          <div class="skeleton-row"><b>服務項目</b><div class="skeleton-lines" aria-label="資料待補"><span></span><span></span></div></div>
+          <div class="skeleton-row"><b>服務範圍</b><div class="skeleton-lines" aria-label="資料待補"><span></span><span></span></div></div>
+          <div class="skeleton-row"><b>方案費用</b><div class="skeleton-lines" aria-label="資料待補"><span></span><span></span></div></div>
+          <div class="pricing-panel-footer"><span>正式內容待來源文件確認</span><a class="btn btn-primary" href="https://calendar.app.google/TrtrYgJL4e9jGqE57" target="_blank" rel="noopener noreferrer">預約諮詢 <svg aria-hidden="true"><use href="#icon-arrow"></use></svg></a></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 05 / Five-step provisional collaboration flow -->
+    <section class="process section-pad" id="process" aria-labelledby="processTitle">
+      <div class="page-wrap">
+        <div class="process-head reveal"><div><p class="section-kicker smallcap">04 — THE FLOW</p><h2 class="section-heading" id="processTitle">合作很認真，<br><span class="handline">過程可以很輕鬆。</span></h2></div><span class="draft-note">✳ 暫定流程・待來源文件確認</span></div>
+        <div class="process-journey"><svg class="journey-svg" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true"><path d="M40 45C185-3 245 112 350 75S525-5 615 49S800 105 885 56S1075-2 1170 41" fill="none" stroke="#5FA8D3" stroke-width="1.8" stroke-dasharray="6 8" stroke-opacity=".6"/></svg>
+          <div class="process-steps">
+            <article class="process-step reveal"><div class="process-dot"><svg aria-hidden="true"><use href="#icon-chat"></use></svg></div><span class="num">PHASE 01</span><h3>需求訪談</h3><p>先理解品牌的真實需求。</p></article>
+            <article class="process-step reveal"><div class="process-dot"><svg aria-hidden="true"><use href="#icon-compass"></use></svg></div><span class="num">PHASE 02</span><h3>品牌策略</h3><p>釐清定位與創意方向。</p></article>
+            <article class="process-step reveal"><div class="process-dot"><svg aria-hidden="true"><use href="#icon-pen"></use></svg></div><span class="num">PHASE 03</span><h3>設計製作</h3><p>讓想法化為具體的設計。</p></article>
+            <article class="process-step reveal"><div class="process-dot"><svg aria-hidden="true"><use href="#icon-check"></use></svg></div><span class="num">PHASE 04</span><h3>交付上線</h3><p>交付成果，準備與世界見面。</p></article>
+            <article class="process-step reveal"><div class="process-dot"><svg aria-hidden="true"><use href="#icon-chart"></use></svg></div><span class="num">PHASE 05</span><h3>成效追蹤</h3><p>用數據理解設計帶來的變化。</p></article>
+          </div>
+        </div>
+        <p class="process-caption">＊ 以上五階段為來源提示詞提供的暫定架構，並非已確認的服務契約內容；正式流程以作品集素材與雙方合作約定為準。</p>
+      </div>
+    </section>
+
+    <!-- Section 06 / Founder story, real source text retained -->
+    <section class="about section-pad" id="about" aria-labelledby="aboutTitle">
+      <div class="page-wrap">
+        <div class="about-hero">
+          <div class="portrait-frame reveal" role="img" aria-label="創辦人照片待補：目前以摸魚工作室品牌金魚標誌呈現">
+            <div class="portrait-circle"><svg class="portrait-fish" viewBox="0 0 350 210" aria-hidden="true"><use href="#fish-mark"></use></svg></div>
+            <div class="portrait-stamp" aria-hidden="true">SERIOUSLY<br>NOT TOO<br>SERIOUS</div><span class="portrait-placeholder">FOUNDER PORTRAIT / 創辦人照片待補</span>
+          </div>
+          <div class="reveal"><p class="section-kicker smallcap">05 — THE PERSON BEHIND THE FISH</p><h2 class="section-heading" id="aboutTitle">設計可以很有態度，<br>合作不必<span class="handline">太有壓力。</span></h2>
+            <div class="about-name"><strong>吳所謂</strong><span>Wu Suo-Wei</span></div><p class="about-title">摸魚設計工作室 Slacker Fish Studio 創辦人</p>
+            <p class="about-lead">我是吳所謂，一位深信好設計不只要好看，更要讓品牌被記住、讓生意真正發生的品牌設計師。創立摸魚設計工作室，希望用創意、策略與一點幽默，幫助每個認真經營的小品牌，找到屬於自己的獨特魅力。</p>
+            <div class="about-numbers"><div class="about-number"><strong>8</strong><span>年品牌與數位經驗</span></div><div class="about-number"><strong>60+</strong><span>合作品牌</span></div><div class="about-number"><strong>70%</strong><span>回頭客或口碑轉介</span></div></div>
+          </div>
+        </div>
+        <div class="about-features">
+          <div class="about-feature-head reveal"><div><p class="section-kicker smallcap">FIVE LITTLE THINGS ABOUT ME</p><h3 class="section-heading">不只會設計，<br>還有一點<span class="handline">不太正經。</span></h3></div><p>從街角小店到科技新創，從課堂到真實商業現場。我相信，專業不必很嚴肅，好的合作更可以帶著微笑。</p></div>
+          <div class="feature-list">
+            <article class="feature-row reveal"><span class="number">01</span><h3>八年實戰經驗，<br>懂設計也懂等待</h3><div class="body"><p>擁有 8 年品牌設計與數位專案經驗，其中約 3 年致力於研究客戶回信的神祕週期。</p><p>擅長品牌識別、視覺設計、網站規劃與品牌定位，從創意發想到實際落地，提供完整且務實的解決方案。</p></div></article>
+            <article class="feature-row reveal"><span class="number">02</span><h3>跨產業合作，<br>讓每個品牌都有故事</h3><div class="body"><p>累計合作 60+ 品牌，橫跨餐飲、夜市攤商、寵物旅宿、食品科技、植栽零售及民宿產業。</p><p>70% 合作來自回頭客或口碑轉介紹，相信好的設計成果與愉快的合作體驗，才是長期信任的基礎。</p></div></article>
+            <article class="feature-row reveal"><span class="number">03</span><h3>業界與學界教學，<br>讓創意持續擴散</h3><div class="body"><p>曾為阿嬤的鹹酥雞、貓老大寵物旅館、量子豆漿科技、死不了植栽及東門市場攤商聯誼會等品牌提供設計內訓。</p><p>擔任社區大學、科技大學、創業營隊及產業工作坊講師，分享品牌定位、商業設計與創意實務。</p><p>熱門課程包括「如何優雅地拒絕改第 10 版」、「論截止日的彈性」及「如何拍出不配合的貓」，讓專業知識也能有趣又接地氣。</p></div></article>
+            <article class="feature-row reveal"><span class="number">04</span><h3>結合設計與科技，<br>讓創意更有效率</h3><div class="body"><p>熟悉 Figma、Illustrator、Photoshop、VS Code 與 ChatGPT，整合視覺設計、網站開發與 AI 工具，打造兼具美感與效率的品牌體驗。</p><p>額外持有自行認證的「逗貓棒操作一級」及「珍奶甜度鑑定師」資格，證明專業之外，也要保有生活的趣味。</p></div></article>
+            <article class="feature-row reveal"><span class="number">05</span><h3>我的設計理念：<br>認真做設計，輕鬆做朋友</h3><div class="body"><p>我相信，真正成功的品牌設計，不是把品牌包裝得多麼華麗，而是找到它最真實、最有價值的特色。</p><p>摸魚不是偷懶，而是懂得用更聰明的方法，把事情做到最好。</p><p>期待與每一位有想法、有熱情的品牌經營者合作，讓好點子變成好設計，讓好設計創造好生意。</p></div></article>
+          </div>
+          <div class="about-signoff reveal"><em>Slacker Fish Studio｜有策略地摸魚，有態度地設計。</em><span class="smallcap" style="color:var(--muted)">GOOD WORK. GOOD PEOPLE. GOOD FISH.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 07 / Fully accessible interactive accordion, without fabricated policy -->
+    <section class="faq section-pad" id="faq" aria-labelledby="faqTitle">
+      <div class="page-wrap faq-layout"><div class="reveal"><p class="section-kicker smallcap">06 — A FEW GOOD QUESTIONS</p><h2 class="section-heading" id="faqTitle">在開始合作前，<br>先<span class="handline">聊清楚。</span></h2><p class="section-intro">正式常見問答將完整沿用來源文件內容，目前保留可展開的互動版型。</p></div>
+        <div class="faq-panel reveal"><div class="faq-entry"><button class="faq-question" type="button" id="faqToggle1" aria-expanded="false" aria-controls="faqPanel1"><span>常見問答內容何時會上線？（素材待補說明）</span><span class="faq-plus" aria-hidden="true">+</span></button><div class="faq-answer" id="faqPanel1" role="region" aria-labelledby="faqToggle1" data-open="false" inert><div class="faq-answer-inner"><p>尚未收到《作品集素材_逗趣版.docx》中的 FAQ 原文。待取得文件後，會以正式問題與答案取代此處，不會自行設定合作政策、修改次數或價格條件。</p></div></div></div><p class="faq-mini">有自己的問題想先聊聊？可以直接預約免費 30 分鐘摸魚諮詢。</p></div>
+      </div>
+    </section>
+
+    <!-- Core services / Before booking -->
+    <section class="core-services section-pad" id="core-services" aria-labelledby="coreServicesTitle">
+      <div class="page-wrap">
+        <p class="section-kicker smallcap">CORE SERVICES &amp; MORE</p>
+        <h2 class="section-heading" id="coreServicesTitle">核心服務<span class="handline">與加值</span></h2>
+        <p class="section-intro">從品牌定位到 AI 工作流，讓你的特色被看見，也讓日常經營更省力。</p>
+        <div class="core-service-list">
+          <article class="core-service-row">
+            <div class="core-service-name"><span class="core-service-icon" aria-hidden="true"><i class="fa-solid fa-comments"></i></span><h3>品牌訪談與定位</h3></div>
+            <p class="core-service-pain"><span class="core-service-label">你的困擾</span>說不出自己跟隔壁店哪裡不一樣</p>
+            <p><span class="core-service-label">我們帶來的改變</span>一句話講清楚你是誰、賣給誰、為什麼選你</p>
+          </article>
+          <article class="core-service-row">
+            <div class="core-service-name"><span class="core-service-icon" aria-hidden="true"><i class="fa-solid fa-pen-nib"></i></span><h3>品牌命名與 Logo</h3></div>
+            <p class="core-service-pain"><span class="core-service-label">你的困擾</span>撞名、名字難記、招牌被油煙燻黑</p>
+            <p><span class="core-service-label">我們帶來的改變</span>客人記得住、找得到、願意拍照打卡</p>
+          </article>
+          <article class="core-service-row">
+            <div class="core-service-name"><span class="core-service-icon" aria-hidden="true"><i class="fa-solid fa-palette"></i></span><h3>視覺識別系統</h3></div>
+            <p class="core-service-pain"><span class="core-service-label">你的困擾</span>名片、菜單、包裝各長各的</p>
+            <p><span class="core-service-label">我們帶來的改變</span>標準色、字體與規範手冊，自己做 DM 也不會走鐘</p>
+          </article>
+          <article class="core-service-row">
+            <div class="core-service-name"><span class="core-service-icon" aria-hidden="true"><i class="fa-solid fa-globe"></i></span><h3>品牌官網</h3></div>
+            <p class="core-service-pain"><span class="core-service-label">你的困擾</span>客人都在私訊問一樣的問題</p>
+            <p><span class="core-service-label">我們帶來的改變</span>24 小時自動接單、預約與回答常見問題</p>
+          </article>
+          <article class="core-service-row">
+            <div class="core-service-name"><span class="core-service-icon" aria-hidden="true"><i class="fa-solid fa-bullhorn"></i></span><h3>轉換文案</h3></div>
+            <p class="core-service-pain"><span class="core-service-label">你的困擾</span>介紹寫得很長，客人看完還是不買</p>
+            <p><span class="core-service-label">我們帶來的改變</span>三秒看懂的標語，加上會被點的按鈕</p>
+          </article>
+          <article class="core-service-row">
+            <div class="core-service-name"><span class="core-service-icon" aria-hidden="true"><i class="fa-solid fa-layer-group"></i></span><h3>社群貼文版型</h3></div>
+            <p class="core-service-pain"><span class="core-service-label">你的困擾</span>每次發文都要從零開始想</p>
+            <p><span class="core-service-label">我們帶來的改變</span>10 張可重複套用的版型，發文時間少一半</p>
+          </article>
+          <article class="core-service-row">
+            <div class="core-service-name"><span class="core-service-icon" aria-hidden="true"><i class="fa-solid fa-robot"></i></span><h3>AI 工作流導入</h3></div>
+            <p class="core-service-pain"><span class="core-service-label">你的困擾</span>想用 ChatGPT 卻不知道從哪開始</p>
+            <p><span class="core-service-label">我們帶來的改變</span>一套專屬提示詞，自己就能產文案、生圖、改網站</p>
+          </article>
+        </div>
+      </div>
+    </section>
+    <!-- Contact channels and inquiry / Before booking -->
+    <section class="contact-me section-pad" id="contact-me" aria-labelledby="contactMeTitle">
+      <div class="page-wrap contact-me-layout">
+        <div>
+          <p class="section-kicker smallcap">CONTACT ME</p>
+          <h2 class="section-heading" id="contactMeTitle">聯絡我，<br>聊聊你的<span class="handline">下一個點子。</span></h2>
+          <p class="section-intro">想建立品牌、打造網站，或讓工作流程更有效率？先填寫需求表單，讓我了解你的想法。</p>
+          <!-- Add personal profile URLs as links when supplied. -->
+          <ul class="social-channels" aria-label="社群平台（帳號連結待補）">
+            <li class="social-channel"><i class="fa-brands fa-line social-line" aria-hidden="true"></i><strong>LINE</strong><span>帳號連結待補</span></li>
+            <li class="social-channel"><i class="fa-brands fa-facebook social-facebook" aria-hidden="true"></i><strong>Facebook</strong><span>帳號連結待補</span></li>
+            <li class="social-channel"><i class="fa-brands fa-linkedin social-linkedin" aria-hidden="true"></i><strong>LinkedIn</strong><span>帳號連結待補</span></li>
+            <li class="social-channel"><i class="fa-brands fa-github social-github" aria-hidden="true"></i><strong>GitHub</strong><span>帳號連結待補</span></li>
+          </ul>
+        </div>
+        <div class="inquiry-card" aria-labelledby="inquiryTitle">
+          <span class="inquiry-icon" aria-hidden="true"><i class="fa-solid fa-clipboard-list"></i></span>
+          <p class="smallcap">TELL ME ABOUT YOUR PROJECT</p>
+          <h3 id="inquiryTitle">填寫需求表單</h3>
+          <p>把你想做的事告訴我。透過 Google 表單留下專案需求，讓我們的第一次討論更有方向。</p>
+          <a class="btn btn-primary" href="https://forms.gle/BjQito8WTeZt87LQ9" target="_blank" rel="noopener noreferrer">填寫需求表單 <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i><span class="sr-only">（在新分頁開啟 Google 表單）</span></a>
+          <span class="inquiry-note">將在新分頁開啟 Google 表單。</span>
+        </div>
+      </div>
+    </section>
+    <!-- Section 08 / Single conversion destination -->
+    <section class="contact" id="contact" aria-labelledby="contactTitle">
+      <div class="page-wrap contact-inner">
+        <div class="reveal"><p class="smallcap contact-kicker">07 — LET'S MAKE SOMETHING GOOD</p><h2 id="contactTitle">你的品牌，<br>值得我們<span class="handline">認真摸魚一下。</span></h2><p>想讓品牌更有辨識度，或正在思考如何用設計與 AI 聰明解決問題？不必準備一份完美簡報，我們可以先從一場沒有壓力的對話開始。</p>
+          <div class="contact-cta-wrap"><a class="btn contact-btn" href="https://calendar.app.google/TrtrYgJL4e9jGqE57" target="_blank" rel="noopener noreferrer">預約免費 30 分鐘摸魚諮詢 <svg aria-hidden="true"><use href="#icon-arrow"></use></svg></a><span class="contact-status" aria-hidden="true">Status: 金魚已就位，隨時開聊</span></div>
+        </div>
+        <div class="contact-art reveal" aria-hidden="true"><div class="contact-ring"></div><svg class="contact-fish" viewBox="0 0 350 210"><use href="#fish-mark"></use></svg><div class="contact-bubble a"></div><div class="contact-bubble b"></div><div class="contact-bubble c"></div></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><div class="page-wrap"><div class="footer-top"><div><a class="brand" href="#top" aria-label="摸魚設計工作室，返回首頁"><svg class="brand-mark" aria-hidden="true"><use href="#fish-mark"></use></svg><span><span class="brand-cn block">摸魚設計工作室</span><span class="brand-en block">SLACKER FISH STUDIO</span></span></a><p class="footer-slogan">有策略地摸魚，有態度地設計。</p></div><nav class="footer-nav" aria-label="頁尾導覽"><a href="#services">服務與價值</a><a href="#portfolio">作品案例</a><a href="#pricing">價格方案</a><a href="#process">合作流程</a><a href="#about">關於我</a><a href="#faq">常見問答</a><a href="#contact">預約諮詢</a></nav></div><div class="footer-bottom"><span>© <span id="copyrightYear">2026</span> Slacker Fish Studio · Serious About Design. Not So Serious About Everything Else.</span><a href="#top">返回頂端 ↑</a></div></div></footer>
+  <svg class="traveler" aria-hidden="true" viewBox="0 0 350 210"><use href="#fish-mark"></use></svg>
+
+  <script>
+  'use strict';
+  (() => {
+    // Accessible motion preference: no animation or forced typing for reduced-motion users.
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const setMotionClass = () => document.body.classList.toggle('no-motion', reduceMotion.matches);
+    setMotionClass();
+    if (reduceMotion.addEventListener) reduceMotion.addEventListener('change', setMotionClass);
+    else if (reduceMotion.addListener) reduceMotion.addListener(setMotionClass);
+
+    // Exact one-shot typewriter sequence; an invisible copy reserves final layout height.
+    const typed = document.getElementById('typedTitle');
+    const subtitle = document.getElementById('heroSubtitle');
+    const title = '認真摸魚，用心設計。';
+    const showTitle = text => { typed.textContent = text.replace('，', '，\n'); };
+    let typeToken = 0;
+    function startTyping() {
+      typeToken += 1;
+      const token = typeToken;
+      if (reduceMotion.matches) {
+        showTitle(title);
+        subtitle.classList.add('is-shown');
+        return;
+      }
+      showTitle('');
+      subtitle.classList.remove('is-shown');
+      let position = 0;
+      function next() {
+        if (token !== typeToken || reduceMotion.matches) {
+          showTitle(title);
+          subtitle.classList.add('is-shown');
+          return;
+        }
+        if (position < title.length) {
+          showTitle(title.slice(0, ++position));
+          const pause = position === '認真摸魚'.length ? 600 : 125;
+          window.setTimeout(next, pause);
+        } else {
+          subtitle.classList.add('is-shown');
+        }
+      }
+      window.setTimeout(next, 380);
+    }
+    startTyping();
+    const onPreferenceChange = () => {
+      if (reduceMotion.matches) {
+        typeToken++;
+        showTitle(title);
+        subtitle.classList.add('is-shown');
+      }
+    };
+    if (reduceMotion.addEventListener) reduceMotion.addEventListener('change', onPreferenceChange);
+    else if (reduceMotion.addListener) reduceMotion.addListener(onPreferenceChange);
+
+    // Transparent, sticky glass navigation and active section markers.
+    const header = document.getElementById('header');
+    const updateHeader = () => header.classList.toggle('scrolled', window.scrollY > 25);
+    window.addEventListener('scroll', updateHeader, { passive: true });
+    updateHeader();
+
+    // Mobile navigation supports touch, Escape, focus return and outside-click dismissal.
+    const menu = document.getElementById('mobileNav');
+    const toggle = document.getElementById('menuToggle');
+    const menuIcon = document.getElementById('menuIcon');
+    function setMenu(isOpen, returnFocus = false) {
+      menu.classList.toggle('open', isOpen);
+      menu.inert = !isOpen;
+      toggle.setAttribute('aria-expanded', String(isOpen));
+      toggle.setAttribute('aria-label', isOpen ? '關閉導覽選單' : '開啟導覽選單');
+      menuIcon.setAttribute('href', isOpen ? '#icon-close' : '#icon-menu');
+      if (returnFocus) toggle.focus();
+    }
+    toggle.addEventListener('click', () => setMenu(toggle.getAttribute('aria-expanded') !== 'true'));
+    menu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setMenu(false)));
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && menu.classList.contains('open')) setMenu(false, true);
+      if (event.key === 'Tab' && menu.classList.contains('open')) {
+        const focusable = [...menu.querySelectorAll('a')];
+        const first = focusable[0], last = focusable[focusable.length - 1];
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); toggle.focus(); }
+        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); toggle.focus(); }
+      }
+    });
+    document.addEventListener('pointerdown', event => {
+      if (menu.classList.contains('open') && !menu.contains(event.target) && !toggle.contains(event.target)) setMenu(false);
+    });
+    window.addEventListener('resize', () => { if (window.innerWidth > 930) setMenu(false); }, { passive: true });
+
+    // Scroll reveal and intersection-aware nav highlighting.
+    const reveals = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window && !reduceMotion.matches) {
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -22px 0px' });
+      reveals.forEach(el => revealObserver.observe(el));
+    } else { reveals.forEach(el => el.classList.add('is-visible')); }
+
+    const navLinks = document.querySelectorAll('.desktop-nav a');
+    if ('IntersectionObserver' in window) {
+      const sectionObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) navLinks.forEach(link => {
+            const active = link.getAttribute('href') === '#' + entry.target.id;
+            link.classList.toggle('active', active);
+            if (active) link.setAttribute('aria-current', 'location');
+            else link.removeAttribute('aria-current');
+          });
+        });
+      }, { rootMargin: '-24% 0px -58% 0px', threshold: 0 });
+      document.querySelectorAll('main section[id]').forEach(el => sectionObserver.observe(el));
+    }
+
+    // Accordion uses aria-expanded, aria-controls, panel inertness and CSS grid animation.
+    document.querySelectorAll('.faq-question').forEach(button => {
+      const panel = document.getElementById(button.getAttribute('aria-controls'));
+      button.addEventListener('click', () => {
+        const opened = button.getAttribute('aria-expanded') !== 'true';
+        button.setAttribute('aria-expanded', String(opened));
+        panel.dataset.open = String(opened);
+        panel.inert = !opened;
+      });
+    });
+
+    // Desktop aquarium parallax, only while visible. requestAnimationFrame limits updates.
+    const art = document.getElementById('heroArt');
+    let parallaxFrame = 0;
+    let artIsVisible = true;
+    if ('IntersectionObserver' in window) {
+      const artObserver = new IntersectionObserver(([entry]) => { artIsVisible = entry.isIntersecting; }, { threshold: 0 });
+      artObserver.observe(art);
+    }
+    art.addEventListener('pointermove', event => {
+      if (reduceMotion.matches || document.hidden || !artIsVisible || window.innerWidth <= 930 || event.pointerType === 'touch') return;
+      const box = art.getBoundingClientRect();
+      const dx = (event.clientX - (box.left + box.width / 2)) / box.width;
+      const dy = (event.clientY - (box.top + box.height / 2)) / box.height;
+      if (parallaxFrame) cancelAnimationFrame(parallaxFrame);
+      parallaxFrame = requestAnimationFrame(() => {
+        art.querySelector('.aquarium').style.transform = `translate3d(${dx * 10}px,${dy * 10}px,0)`;
+        parallaxFrame = 0;
+      });
+    }, { passive: true });
+    art.addEventListener('pointerleave', () => {
+      if (parallaxFrame) cancelAnimationFrame(parallaxFrame);
+      art.querySelector('.aquarium').style.transform = '';
+    });
+    document.addEventListener('visibilitychange', () => {
+      document.body.classList.toggle('page-hidden', document.hidden);
+      if (document.hidden && parallaxFrame) cancelAnimationFrame(parallaxFrame);
+    });
+    document.getElementById('copyrightYear').textContent = new Date().getFullYear();
+  })();
+  </script>
+</body>
+</html>
